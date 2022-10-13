@@ -1,16 +1,23 @@
 // How to fetch Data from server.
 
 function fetchDataFromServer() {
-  fetch("https://jsonplaceholder.typicode.com/todos")
+  fetch("https://dummyjson.com/users")
     .then((response) => response.json())
     .then((json) => printData(json));
 }
 
 function printData(data) {
   console.log(data);
-  let ele = document.getElementById("code");
-  let tempData = data.filter((a) => a.id < 50);
-  ele.innerHTML = JSON.stringify(tempData, null, 4);
+  const {limit, skip, total, users} = data;
+  let userArray = users.map((ele) => {
+    return {
+      "firstName": ele.firstName,
+      "lastName": ele.lastName,
+      "age": ele.age,
+      "bloodGroup": ele.bloodGroup
+    }
+  })
+  console.log(userArray);
 }
 
 fetchDataFromServer();
